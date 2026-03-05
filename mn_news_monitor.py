@@ -61,11 +61,12 @@ MN_KEYWORDS = [
 
 SOURCES = [
     # ---- Twin Cities / Statewide ----
-    {
+  {
         "name": "Pioneer Press",
         "type": "rss",
         "url": "https://www.twincities.com/feed",
         "mn_filter": False,
+        "skip_wire": True,
     },
     {
         "name": "KSTP",
@@ -138,18 +139,6 @@ SOURCES = [
         "name": "Bemidji Pioneer",
         "type": "rss",
         "url": "https://www.bemidjipioneer.com/news.rss",
-        "mn_filter": False,
-    },
-    {
-        "name": "Grand Rapids Herald-Review",
-        "type": "scrape",
-        "url": "https://www.grandrapidsmn.com",
-        "mn_filter": False,
-    },
-    {
-        "name": "Mesabi Tribune",
-        "type": "scrape",
-        "url": "https://www.mesabitribune.com",
         "mn_filter": False,
     },
     {
@@ -327,7 +316,10 @@ def run():
                 continue
 
             seen.add(sid)
-            wire_flag = is_wire(story["title"], story["summary"], story["author"])
+           wire_flag = is_wire(story["title"], story["summary"], story["author"])
+            if wire_flag and source.get("skip_wire"):
+                print(f"  ✗ SKIPPED WIRE: {story['title'][:80]}")
+                continue
             send_slack(story, wire_flag)
             wire_label = " [WIRE?]" if wire_flag else ""
             print(f"  ✓ NEW{wire_label}: {story['title'][:80]}")
