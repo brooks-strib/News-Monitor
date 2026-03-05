@@ -129,11 +129,11 @@ SOURCES = [
         "url": "https://www.duluthnewstribune.com/news.rss",
         "mn_filter": False,
     },
-    {
+      {
         "name": "Post Bulletin (Rochester)",
         "type": "scrape",
         "url": "https://www.postbulletin.com",
-        "mn_filter": False,
+        "mn_filter": True,
     },
     {
         "name": "Bemidji Pioneer",
