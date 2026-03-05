@@ -1,5 +1,5 @@
 """
-Minnesota News Monitor
+Minnesota News Monitor v1.1
 ======================
 Checks a list of Minnesota news sources every 15 minutes (via GitHub Actions).
 Sends new stories matching your criteria to a Slack channel.
