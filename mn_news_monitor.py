@@ -293,7 +293,7 @@ def send_slack(story, is_wire_flag):
 
 
 def run():
-    print(f"\n{'='*50}")
+    print(f"\\n{'='*50}")
     print(f"Minnesota News Monitor — {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"{'='*50}")
 
@@ -301,7 +301,7 @@ def run():
     new_count = 0
 
     for source in SOURCES:
-        print(f"\nChecking: {source['name']} ({source['type'].upper()})")
+        print(f"\\nChecking: {source['name']} ({source['type'].upper()})")
 
         if source["type"] == "rss":
             stories = fetch_rss(source)
@@ -316,7 +316,7 @@ def run():
                 continue
 
             seen.add(sid)
-           wire_flag = is_wire(story["title"], story["summary"], story["author"])
+            wire_flag = is_wire(story["title"], story["summary"], story["author"])
             if wire_flag and source.get("skip_wire"):
                 print(f"  ✗ SKIPPED WIRE: {story['title'][:80]}")
                 continue
@@ -326,7 +326,7 @@ def run():
             new_count += 1
 
     save_seen(seen)
-    print(f"\nDone. {new_count} new stories sent to Slack.")
+    print(f"\\nDone. {new_count} new stories sent to Slack.")
 
 
 if __name__ == "__main__":
