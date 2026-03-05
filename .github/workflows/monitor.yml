@@ -3,7 +3,7 @@ name: Minnesota News Monitor
 on:
   schedule:
     # Runs every 15 minutes
-    - cron: "*/15 * * * *"
+    - cron: "*/15 * * * *" #enabled
   workflow_dispatch:
     # Also lets you run it manually from the GitHub Actions tab
 
