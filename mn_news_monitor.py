@@ -191,12 +191,6 @@ SOURCES = [
         "url": "https://feeds.content.dowjones.io/public/rss/RSSWorldNews",
         "mn_filter": True,
     },
-    {
-        "name": "Reuters",
-        "type": "rss",
-        "url": "https://news.google.com/rss/search?q=Minnesota+site:reuters.com&ceid=US:en&hl=en-US&gl=US",
-        "mn_filter": False,
-    },
 ]
 
 # ============================================================
