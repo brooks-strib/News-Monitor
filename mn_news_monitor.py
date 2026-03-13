@@ -41,12 +41,25 @@ WIRE_BYLINES = [
 # Minnesota keywords — used to filter stories on non-MN-dedicated feeds
 # (Most of your sources are MN-only, so this is a fallback safety net)
 MN_KEYWORDS = [
+    # Geography
     "Minnesota", "Minneapolis", "St. Paul", "Saint Paul",
     "Twin Cities", "Duluth", "Rochester", "St. Cloud", "Bemidji",
-    "Grand Rapids", "Hibbing", "Virginia MN", "Mesabi",
-    "Timberwolves", "Vikings", "Twins", "Wild", "Lynx", "Frost",
-    "Gophers", "U of M", "University of Minnesota",
-    "Walz", "Ellison", "Omar", "Klobuchar",
+    "Grand Rapids", "Hibbing", "Mankato", "Moorhead", "Brainerd",
+    "Boundary Waters", "BWCA", "Boundary Waters Canoe",
+    "Boundary Waters Wilderness",
+    # Politics
+    "Walz", "Klobuchar", "Ilhan Omar", "Angie Craig",
+    "Tom Emmer", "Pete Stauber", "Brad Finstad",
+    "Minnesota Legislature", "Minnesota Senate", "Minnesota House", 
+    # Companies / Institutions
+    "Mayo Clinic", "3M Company", "Medtronic", "Target Corp",
+    "Best Buy", "General Mills", "Cargill", "US Bancorp",
+    "UnitedHealth", "Polaris Industries",
+    # Sports
+    "Timberwolves", "Vikings", "Twins", "Wild", "Lynx",
+    "Minnesota United", "Gophers", "University of Minnesota",
+    # Immigration / federal
+    "ICE Minnesota", "immigration Minnesota",
 ]
 
 # ============================================================
@@ -145,6 +158,43 @@ SOURCES = [
         "name": "St. Cloud Times",
         "type": "rss",
         "url": "https://www.sctimes.com/rss/news/local.xml",
+        "mn_filter": False,
+    },
+  # ---- National Outlets (MN keyword filtered) ----
+    {
+        "name": "New York Times",
+        "type": "rss",
+        "url": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+        "mn_filter": True,
+    },
+    {
+        "name": "Washington Post",
+        "type": "rss",
+        "url": "https://feeds.washingtonpost.com/rss/national",
+        "mn_filter": True,
+    },
+    {
+        "name": "The Guardian",
+        "type": "rss",
+        "url": "https://www.theguardian.com/us-news/rss",
+        "mn_filter": True,
+    },
+    {
+        "name": "Politico",
+        "type": "rss",
+        "url": "https://www.politico.com/rss/politicopicks.xml",
+        "mn_filter": True,
+    },
+    {
+        "name": "Wall Street Journal",
+        "type": "rss",
+        "url": "https://feeds.content.dowjones.io/public/rss/RSSWorldNews",
+        "mn_filter": True,
+    },
+    {
+        "name": "Reuters",
+        "type": "rss",
+        "url": "https://news.google.com/rss/search?q=Minnesota+site:reuters.com&ceid=US:en&hl=en-US&gl=US",
         "mn_filter": False,
     },
 ]
