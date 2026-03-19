@@ -91,7 +91,7 @@ SOURCES = [
         "name": "KARE 11",
         "type": "rss",
         "url": "https://www.kare11.com/feeds/syndication/rss/news/",
-        "mn_filter": False,
+        "mn_filter": True,
     },
     {
         "name": "CBS News Minnesota",
