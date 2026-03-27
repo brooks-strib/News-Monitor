@@ -312,23 +312,33 @@ def fetch_scrape(source):
     return stories
 
 
-def send_slack(story, is_wire_flag):
-    """Post a single story to Slack."""
+def send_slack(source_name, stories):
+    """Post all new stories from one source as a single Slack message."""
     if not SLACK_WEBHOOK_URL:
-        print(f"  [NO WEBHOOK] Would send: {story['title']}")
+        for story in stories:
+            print(f"  [NO WEBHOOK] Would send: {story['title']}")
         return
 
-    wire_note = "  ⚠️ _Possible wire content_" if is_wire_flag else ""
-    source    = story["source"]
-    title     = story["title"]
-    url       = story["url"]
-
-    text = f"*{source}*\n<{url}|{title}>{wire_note}"
+    if len(stories) == 1:
+        story = stories[0]
+        text = f"*{source_name}*\n• <{story['url']}|{story['title']}>"
+        if story.get("wire_flag"):
+            text += "  ⚠️ _Possible wire content_"
+    else:
+        lines = [f"*{source_name}* — {len(stories)} new stories"]
+        for story in stories:
+            wire_note = "  ⚠️" if story.get("wire_flag") else ""
+            lines.append(f"• <{story['url']}|{story['title']}>{wire_note}")
+        text = "\n".join(lines)
 
     try:
         resp = requests.post(
             SLACK_WEBHOOK_URL,
-            json={"text": text},
+            json={
+                "text": text,
+                "unfurl_links": False,
+                "unfurl_media": False,
+            },
             timeout=10,
         )
         resp.raise_for_status()
@@ -337,7 +347,7 @@ def send_slack(story, is_wire_flag):
 
 
 def run():
-    print(f"\\n{'='*50}")
+    print(f"\n{'='*50}")
     print(f"Minnesota News Monitor — {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"{'='*50}")
 
@@ -345,7 +355,7 @@ def run():
     new_count = 0
 
     for source in SOURCES:
-        print(f"\\nChecking: {source['name']} ({source['type'].upper()})")
+        print(f"\nChecking: {source['name']} ({source['type'].upper()})")
 
         if source["type"] == "rss":
             stories = fetch_rss(source)
@@ -354,6 +364,7 @@ def run():
 
         print(f"  Found {len(stories)} items")
 
+        new_stories = []
         for story in stories:
             sid = story_id(story["url"], story["title"])
             if sid in seen:
@@ -361,16 +372,22 @@ def run():
 
             seen.add(sid)
             wire_flag = is_wire(story["title"], story["summary"], story["author"])
+
             if wire_flag and source.get("skip_wire"):
                 print(f"  ✗ SKIPPED WIRE: {story['title'][:80]}")
                 continue
-            send_slack(story, wire_flag)
+
+            story["wire_flag"] = wire_flag
+            new_stories.append(story)
             wire_label = " [WIRE?]" if wire_flag else ""
             print(f"  ✓ NEW{wire_label}: {story['title'][:80]}")
             new_count += 1
 
+        if new_stories:
+            send_slack(source["name"], new_stories)
+
     save_seen(seen)
-    print(f"\\nDone. {new_count} new stories sent to Slack.")
+    print(f"\nDone. {new_count} new stories sent to Slack.")
 
 
 if __name__ == "__main__":
