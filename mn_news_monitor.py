@@ -74,12 +74,12 @@ MN_KEYWORDS = [
 
 SOURCES = [
     # ---- Twin Cities / Statewide ----
-  {
+    {
         "name": "Pioneer Press",
         "type": "rss",
         "url": "https://www.twincities.com/feed",
         "mn_filter": False,
-        "skip_wire": True,
+        "skip_wire": False,
     },
     {
         "name": "KSTP",
