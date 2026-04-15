@@ -352,6 +352,7 @@ def run():
     print(f"{'='*50}")
 
     seen = load_seen()
+    seen_headlines = set()
     new_count = 0
 
     for source in SOURCES:
@@ -371,6 +372,11 @@ def run():
                 continue
 
             seen.add(sid)
+            headline_key = story["title"].strip().lower()
+            if headline_key in seen_headlines:
+                print(f"  ✗ DUPLICATE HEADLINE: {story['title'][:80]}")
+                continue
+            seen_headlines.add(headline_key)
             wire_flag = is_wire(story["title"], story["summary"], story["author"])
 
             if wire_flag and source.get("skip_wire"):
