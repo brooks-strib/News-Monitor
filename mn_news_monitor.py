@@ -191,6 +191,64 @@ SOURCES = [
         "url": "https://feeds.content.dowjones.io/public/rss/RSSWorldNews",
         "mn_filter": True,
     },
+  # ---- Small Market MN TV (wire filter on) ----
+    {
+        "name": "WDIO (Duluth)",
+        "type": "rss",
+        "url": "https://www.wdio.com/feed",
+        "mn_filter": False,
+        "skip_wire": True,
+    },
+    {
+        "name": "Northern News Now (Duluth)",
+        "type": "rss",
+        "url": "https://www.northernnewsnow.com/feed",
+        "mn_filter": False,
+        "skip_wire": True,
+    },
+    {
+        "name": "FOX 21 (Duluth)",
+        "type": "rss",
+        "url": "https://www.fox21online.com/feed",
+        "mn_filter": False,
+        "skip_wire": True,
+    },
+    {
+        "name": "KEYC (Mankato)",
+        "type": "scrape",
+        "url": "https://www.keyc.com",
+        "mn_filter": False,
+        "skip_wire": True,
+    },
+    {
+        "name": "KTTC (Rochester)",
+        "type": "scrape",
+        "url": "https://www.kttc.com",
+        "mn_filter": False,
+        "skip_wire": True,
+    },
+    {
+        "name": "KAAL (Austin/Rochester)",
+        "type": "scrape",
+        "url": "https://www.kaaltv.com",
+        "mn_filter": False,
+        "skip_wire": True,
+    },
+    # ---- Fargo Market (MN filter + wire filter) ----
+    {
+        "name": "KVRR (Fargo)",
+        "type": "rss",
+        "url": "https://www.kvrr.com/feed",
+        "mn_filter": True,
+        "skip_wire": True,
+    },
+    {
+        "name": "Valley News Live (Fargo)",
+        "type": "scrape",
+        "url": "https://www.valleynewslive.com",
+        "mn_filter": True,
+        "skip_wire": True,
+    },
 ]
 
 # ============================================================
