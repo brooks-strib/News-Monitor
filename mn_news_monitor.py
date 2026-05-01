@@ -196,7 +196,7 @@ SOURCES = [
         "name": "WDIO (Duluth)",
         "type": "rss",
         "url": "https://www.wdio.com/feed",
-        "mn_filter": False,
+        "mn_filter": True,
         "skip_wire": True,
     },
     {
