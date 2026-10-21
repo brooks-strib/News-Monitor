@@ -249,6 +249,19 @@ SOURCES = [
         "mn_filter": True,
         "skip_wire": True,
     },
+    {
+        "name": "KAXE (Northern MN Public Radio)",
+        "type": "rss",
+        "url": "https://www.kaxe.org/rss.xml",
+        "mn_filter": False,
+    },
+    {
+        "name": "Brainerd Dispatch",
+        "type": "rss",
+        "url": "https://www.brainerddispatch.com/news.rss",
+        "mn_filter": False,
+        "skip_wire": True,
+    },
 ]
 
 # ============================================================
