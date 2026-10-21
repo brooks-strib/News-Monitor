@@ -252,7 +252,7 @@ SOURCES = [
     {
         "name": "KAXE (Northern MN Public Radio)",
         "type": "rss",
-        "url": "https://www.kaxe.org/rss.xml",
+        "url": "https://www.kaxe.org/local-news/rss.xml",
         "mn_filter": False,
     },
     {
